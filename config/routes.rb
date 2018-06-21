@@ -2,55 +2,48 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  # get '/:assettype/*asset',
+  #   to: static("/%{assettype}/%{asset}"),
+  #   constraints: AssetConstraint.new([
+  #     RegexConstraint.new("stylesheets|javascripts|images|fonts"),
+  #     RegexConstraint.new("[a-zA-Z0-9]*\.[a-zA-Z0-9]*")
+  #   ])
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  # Matches the assets used.
+  namespace :stylesheets do
+    get 'print', to: static('stylesheets/print.css')
+    get 'screen', to: static('stylesheets/screen.css')
+  end
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  namespace :javascripts do
+    get 'all', to: static('javascripts/all.js')
+    get 'all_nosearch', to: static('javascripts/all_nosearch.js')
+  end
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  namespace :images do
+    get 'logo', to: static('images/logo.png')
+    get 'navbar', to: static('images/navbar.png')
+  end
 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+  namespace :fonts do
+    get 'slate.woff', to: static('fonts/slate.woff')
+    get 'slate.woff2', to: static('fonts/slate.woff2')
+    get 'slate.ttf', to: static('fonts/slate.ttf')
+  end
 
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+  # Matches any resource based URL. This is the part that gets editted for new resources.
+  get '/puppers/*end', to: static('puppers/index.html')
+  get '/kittens/*end', to: static('kittens/index.html')
+  # get '/*front/puppers/*end', to: static('puppers/index.html')
+  # get '/*front/kittens/*end', to: static('kittens/index.html')
 
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
+  # Matches the index
+  get '/', to: static('/index.html')
 
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
+  # If a route does not match, redirect.
+  get '/*any', to: static('index.html'), constraints: {
+    any: /[a-zA-Z0-9]*\/[a-zA-Z0-9]*\/.*/
+  }
+  get '*any', to: redirect('/%{any}/index.html')
 
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end
