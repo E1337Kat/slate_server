@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'catch_all/index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -32,8 +34,8 @@ Rails.application.routes.draw do
   end
 
   # Matches any resource based URL. This is the part that gets editted for new resources.
-  get '/puppers/*end', to: static('puppers/index.html')
-  get '/kittens/*end', to: static('kittens/index.html')
+  get '/puppers/', to: static('puppers/index.html')
+  get '/kittens/', to: static('kittens/index.html')
   # get '/*front/puppers/*end', to: static('puppers/index.html')
   # get '/*front/kittens/*end', to: static('kittens/index.html')
 
@@ -41,9 +43,9 @@ Rails.application.routes.draw do
   get '/', to: static('/index.html')
 
   # If a route does not match, redirect.
-  get '/*any', to: static('index.html'), constraints: {
-    any: /[a-zA-Z0-9]*\/[a-zA-Z0-9]*\/.*/
-  }
-  get '*any', to: redirect('/%{any}/index.html')
+  # get '/*any', to: static('index.html'), constraints: {
+  #   any: /[a-zA-Z0-9]*\/[a-zA-Z0-9]*\/.*/
+  # }
+  get '*any', to: 'catch_all#index'
 
 end
