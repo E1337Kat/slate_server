@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+
+@import 'screen.css.scss';
+@import 'print.css.scss'

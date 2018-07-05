@@ -1,0 +1,10 @@
+<%
+  if Rails.configuration.data['forward_includes']
+    partials = Rails.configuration.data['forward_includes']
+
+    partials.each do |include|
+      @content =+ markdown(File.read(Rails.root.join("templates/forward_includes/#{include}.md")))
+    end
+  end
+%>
+<%= @content %>

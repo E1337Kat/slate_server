@@ -1,0 +1,2 @@
+module DocsHomeHelper
+end

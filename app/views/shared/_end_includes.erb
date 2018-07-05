@@ -1,0 +1,10 @@
+<%
+  if Rails.configuration.data['includes']
+    partials = Rails.configuration.data['includes']
+
+    partials.each do |include|
+      @content += markdown(File.read(Rails.root.join("templates/includes/#{include}.md")))
+    end
+  end
+%>
+<%= @content %>

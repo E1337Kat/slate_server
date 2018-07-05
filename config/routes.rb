@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'docs_home/index'
+
   get 'catch_all/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

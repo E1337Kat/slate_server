@@ -1,0 +1,35 @@
+production: &production
+  title: API Reference
+
+  language_tabs: # must be one of https://git.io/vQNgJ
+    - shell
+    - ruby
+    - python
+    - javascript
+
+  forward_includes:
+    - errors
+    - authorization
+    - api_notes
+
+  search: true
+
+  multiple_pages: true
+
+  resources:
+    - kittens:'/kittens/index.html'
+    - puppers:'/puppers/index.html'
+
+  kittens:
+    - Get All Kittens:'get-all-kittens'
+    - Get a specific kitten:'get-a-specific-kitten'
+    - Delete a specific kitten:'delete-a-specific-kitten'
+
+  puppers:
+    - Get All Puppers:'get-all-puppers'
+    - Get a specific pupper:'get-a-specific-pupper'
+    - Delete a specific pupper:'delete-a-specific-pupper'
+
+development:
+  <<: *production
+  debug: true
