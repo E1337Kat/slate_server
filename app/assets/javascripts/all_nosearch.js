@@ -3,7 +3,7 @@
 //= require app/_lang
 
 $(function() {
-  loadToc($('#toc').html().trim(), '.toc-link', '.toc-list-h2', 10);
+  loadToc($($.parseHTML('#toc')[1]), '.toc-link', '.toc-list-h2', 10);
   setupLanguages($('body').data('languages'));
   $('.content').imagesLoaded( function() {
     window.recacheHeights();
