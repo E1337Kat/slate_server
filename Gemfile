@@ -6,16 +6,13 @@ source 'https://rubygems.org'
 gem 'thin'
 gem 'rails'
 gem 'railties'
-
-# Middleman
-gem 'middleman', '~>4.2.1'
-gem 'middleman-syntax', '~> 3.0.0'
-gem 'middleman-autoprefixer', '~> 2.7.0'
-gem "middleman-sprockets", "~> 4.1.0"
 gem 'rouge', '~> 2.0.5'
 gem 'redcarpet', '~> 3.4.0'
-gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
-gem 'wdm', '~> 0.1', platforms: [:mswin, :mingw]
+
+gem 'sprockets-rails'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

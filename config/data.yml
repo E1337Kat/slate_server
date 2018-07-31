@@ -17,8 +17,8 @@ production: &production
   multiple_pages: true
 
   resources:
-    - kittens:'/kittens/index.html'
-    - puppers:'/puppers/index.html'
+    - kittens:'kittens'
+    - puppers:'puppers'
 
   kittens:
     - Get All Kittens:'get-all-kittens'

@@ -15,7 +15,7 @@ class TocPagedData
       resource_name = resource_name.to_s[0..-2]
       @resource_name_lower = resource_name.downcase
       puts "[DEBUG] #{@resource_name_lower}"
-      @resource_url = header[/\/?[a-zA-Z\-\.\/_]+\/index.html/]
+      @resource_url = header[/\/?[a-zA-Z\-\.\/_]+/]
       puts "[DEBUG} -#{@resource_url}"
       headers.push({
         id: @resource_name_lower,

@@ -1,20 +1,38 @@
 module ApplicationHelper
+  require 'redcarpet'
+  require 'rouge'
+  require 'rouge/plugins/redcarpet'
+
+  class HTML < Redcarpet::Render::HTML
+    include Rouge::Plugins::Redcarpet
+
+    def block_code(code, full_lang_name)
+      if full_lang_name
+        parts = full_lang_name.split('--')
+        rouge_lang_name = (parts) ? parts[0] : "" # just parts[0] here causes null ref exception when no language specified
+        super(code, rouge_lang_name).sub("highlight #{rouge_lang_name}") do |match|
+          match + " tab-" + full_lang_name
+        end
+      else
+        super(code, full_lang_name)
+      end
+    end
+  end
+
   def markdown(text)
     options = {
-      filter_html: true,
-      hard_wrap: true,
-      link_attributes: {rel: 'nofollow', target: '_blank' },
-      space_afer_headers: true,
-      fenced_code_blocks: true
+      prettify: true,
+      with_toc_data: true
     }
 
     extensions = {
-      autolink: true,
-      superscript: true,
-      disable_indented_code_blocks: false
+      tables: true,
+      disable_indented_code_blocks: true,
+      fenced_code_blocks: true
     }
 
-    renderer = Redcarpet::Render::HTML.new(options)
+    # renderer = Redcarpet::Render::HTML.new(options)
+    renderer = HTML.new(options)
     markdown = Redcarpet::Markdown.new(renderer, extensions)
 
     markdown.render(text).html_safe

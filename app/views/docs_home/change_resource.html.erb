@@ -30,8 +30,8 @@ under the License.
   <%= image_tag "logo.png", class: 'logo' %>
   <% if language_tabs.any? %>
     <div class="lang-selector">
-      <% language_tabs.each do |lang| 
-        if lang.is_a? Hash %>
+      <% language_tabs.each do |lang| %>
+        <% if lang.is_a? Hash %>
           <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
         <% else %>
           <a href="#" data-language-name="<%= lang %>"><%= lang %></a>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'docs_home/index'
+  get 'docs_home/index' => 'docs_home#index', :as => :docs_show
+  get 'docs_home/:resource_id/index' => 'docs_home#change_resource', :as => :docs_link
 
   get 'catch_all/index'
 
