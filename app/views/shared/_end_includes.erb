@@ -3,7 +3,7 @@
     partials = Rails.configuration.data['includes']
 
     partials.each do |include|
-      @content += markdown(File.read(Rails.root.join("templates/includes/#{include}.md")))
+      @content += markdown(File.read(Rails.root.join("templates/end_includes/#{include}.md")))
     end
   end
 %>

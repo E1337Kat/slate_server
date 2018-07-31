@@ -1,5 +1,6 @@
+# Public: Controller for catching any bad routes.
 class CatchAllController < ApplicationController
-  def index
-    render body: params.inspect
-  end
+  include ApplicationHelper
+
+  def index; end
 end

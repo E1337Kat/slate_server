@@ -3,6 +3,7 @@ module ApplicationHelper
   require 'rouge'
   require 'rouge/plugins/redcarpet'
 
+  # Special class so that we can have pretty code highlighting. :)
   class HTML < Redcarpet::Render::HTML
     include Rouge::Plugins::Redcarpet
 
@@ -19,6 +20,7 @@ module ApplicationHelper
     end
   end
 
+  # Method that is in charge of actually rendering the markdown as needed.
   def markdown(text)
     options = {
       prettify: true,
@@ -31,13 +33,13 @@ module ApplicationHelper
       fenced_code_blocks: true
     }
 
-    # renderer = Redcarpet::Render::HTML.new(options)
-    renderer = HTML.new(options)
+    renderer = HTML.new(options) # Use custom Renderer
     markdown = Redcarpet::Markdown.new(renderer, extensions)
 
     markdown.render(text).html_safe
   end
 
+  # Should help with active toc, but does not seem to work. :(
   def current_class?(test_path)
     return 'active' if request.path == test_path
     ''
