@@ -22,7 +22,7 @@ class DocsController < ApplicationController
   end
 
   def index_template_path
-    File.read(Rrubocop_root_path.join(FILE))
+    File.read(rubocop_root_path.join(FILE))
   end
 
   def change_resource_template_path

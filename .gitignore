@@ -72,3 +72,7 @@ bower.json
 # Ignore node_modules
 node_modules/
 
+# Ignore templates (no reason to bloat the repro
+templates/*
+!templates/forward_includes
+!templates/includes
