@@ -18,6 +18,10 @@ language_tabs = Rails.configuration.data['language_tabs'] || []
 toc_paged_helper = TocPagedData.new('config/data.yml')
 toc_paged_data = toc_paged_helper.toc_paged_data 
 %>
+<% 
+  toc_helper = TocData.new(@md_resource)
+  toc_data = toc_helper.toc_data 
+%>
 
 <!doctype html>
 <html>
@@ -67,29 +71,67 @@ toc_paged_data = toc_paged_helper.toc_paged_data
         <ul class="search-results"></ul>
       <% end %>
       <div id="toc" class="toc-list-h1">
+        <% logger.info 'Building ToC top level...' %>
+        <%# Iterate through all h1 from toc data. %>
         <% toc_paged_data.each do |h1| %>
           <li>
-            <% Rails.configuration.data['debug'] ? ( puts "[DEBUG - layout.erb]#{h1[:content].to_s}" ) : '' %>
-            <% Rails.configuration.data['debug'] ? ( puts "[DEBUG - layout.erb]- #{h1[:link].to_s}" ) : '' %>
-            <%= link_to h1[:content], docs_link_path(:resource_id => h1[:link]), :class => 'toc-h1 toc-link', :directory_indexes => true %>
-            <ul class="toc-list-h2 active">
-              <% h1[:children].each do |request| %>
+            <%# If the current h1 we are looking at is for this page, process it in the old way. %>
+            <%# logger.info "found resource_id to be:" + params[:resource_id] %>
+            <%# logger.info "found h1[:id] to be:" + h1[:id] %>
+            <% if h1[:id] == params[:resource_id].downcase %>
+              <% logger.info 'Found current ToC Entry (' +h1[:id].to_s + ')' %>
+              <% toc_data.each do |h1| %>
                 <li>
-                  <% request_name = request[/^[a-zA-Z\-\_\s]+:/] %>
-                  <% request_name = request_name.to_s[0..-2] %>
-                  <% Rails.configuration.data['debug'] ? ( puts '  ' + request_name.to_s ) : '' %>
-                  <% request_fragment = request[/:'[a-zA-Z\-\_]+'/] %>
-                  <% request_fragment = request_fragment.to_s[2..-2] %>
-                  <% Rails.configuration.data['debug'] ? ( puts '  ' + request_fragment.to_s ) : '' %>
-                  <% resource_url_full = h1[:link].to_s %>
-                  <%= link_to @request_name, docs_link_path(:resource_id => h1[:link], anchor: request_fragment), :method => :post, :class => 'toc-h2 toc-link' + current_class?(resource_url_full) %>
+                  <%= link_to h1[:content], 
+                              docs_link_path(:resource_id => h1[:id]), 
+                              :class => 'toc-h1 toc-link', 
+                              :directory_indexes => true, 
+                              data: {title: h1[:id]} %>
+                  <ul class="toc-list-h2">
+                    <% logger.info 'Building ToC lower level...' %>
+                    <% h1[:children].each do |h2| %>
+                      <li>
+                        <% resource_url_full = h1[:link].to_s %>
+                        <%= link_to h2[:content],
+                                    docs_link_path(:resource_id => h1[:id],
+                                                    anchor: h2[:id]),
+                                    :method => :post,
+                                    :class => 'toc-h2 toc-link',
+                                    :id => h2[:link],
+                                    data: {title: h2[:id]} %>
+                      </li>
+                    <% end %>
+                  </ul>
                 </li>
               <% end %>
-            </ul>
-          </li>
-        <% end %>
+            <%# Otherwise, we process it the new way using the data.yml %>
+            <% else %>
+              <%= link_to h1[:content], 
+                          docs_link_path(:resource_id => h1[:link]), 
+                          :class => 'toc-h1 toc-link', 
+                          :directory_indexes => true, 
+                          data: {title: h1[:id]} %>
+                <ul class="toc-list-h2">
+                  <% logger.info 'Building ToC lower level...' %>
+                  <% h1[:children].each do |h2| %>
+                    <li>
+                      <% resource_url_full = h1[:link].to_s %>
+                      <%= link_to h2[:content], 
+                                  docs_link_path(:resource_id => h1[:link], 
+                                                anchor: h2[:link]),
+                                  :method => :post, 
+                                  :class => 'toc-h2 toc-link',
+                                  :id => h2[:link],
+                                  data: {title: h2[:id]} %>
+                    </li>
+                  <% end %>
+                </ul>
+              </li>
+            <% end %>
+          <% end %>
       </div>
       <% if Rails.configuration.data['toc_footers'] %>
+        <% logger.info 'Adding ToC footers...' %>
         <ul class="toc-footer">
           <% Rails.configuration.data['toc_footers'].each do |footer| %>
             <li><%= footer.html_safe %></li>
