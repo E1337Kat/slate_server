@@ -19,32 +19,38 @@
   };
 
   var closeToc = function() {
+    console.log("[closeToc]Removing open class...");
     $(".toc-wrapper").removeClass('open');
     $("#nav-button").removeClass('open');
   };
 
   function loadToc($toc, tocLinkSelector, tocListSelector, scrollOffset) {
+    console.log("[loadToc]Passed parameters are: ", $toc, tocLinkSelector, tocListSelector, scrollOffset);
     var headerHeights = {};
     var pageHeight = 0;
     var windowHeight = 0;
     var originalTitle = document.title;
 
     var recacheHeights = function() {
+      console.log("[recacheHeights]Recaching heights...");
       headerHeights = {};
       pageHeight = $(document).height();
       windowHeight = $(window).height();
 
       $toc.find(tocLinkSelector).each(function() {
         var targetId = $(this).attr('href');
-        if (targetId[0] === "#" || targetId[0] == '/') {
-          headerHeights[targetId] = $(targetId).offset().top;
+        var requestElement = targetId.split('#');
+        if (requestElement[1] != null) {
+          headerHeights[requestElement[1]] = $(document.getElementById(requestElement[1])).offset().top;
         }
       });
     };
 
     var refreshToc = function() {
+      //console.log("[refreshToc]Refreshing ToC...");
+      //console.log("[refreshToc]Setting currentTop to be ", $(document).scrollTop(), " + ", scrollOffset);
       var currentTop = $(document).scrollTop() + scrollOffset;
-
+      //console.log("[refreshToc]currentTop is found to be: ", currentTop);
       if (currentTop + windowHeight >= pageHeight) {
         // at bottom of page, so just select last header by making currentTop very large
         // this fixes the problem where the last header won't ever show as active if its content
@@ -53,9 +59,13 @@
       }
 
       var best = null;
+      //console.log("[refreshToc]headerHeights is found to be: ", headerHeights);
       for (var name in headerHeights) {
-        if ((headerHeights[name] < currentTop && headerHeights[name] > headerHeights[best]) || best === null) {
+        if ($toc.find("[h2$='" + name + "']") && 
+            (headerHeights[name] != 0 && headerHeights[name] < currentTop && headerHeights[name] > headerHeights[best]) || 
+            best === null) {
           best = name;
+          //console.log("[refreshToc]regular `best` is found to be: ", best);
         }
       }
 
@@ -65,10 +75,16 @@
         loaded = true;
       }
 
-      var $best = $toc.find("[href='" + best + "']").first();
+      //catch a scroll back to the top
+      if (currentTop == scrollOffset && loaded) {
+        best = null;
+      }
+
+      var $best = $toc.find("[href$='" + best + "']").first();
       if (!$best.hasClass("active")) {
         // .active is applied to the ToC link we're currently on, and its parent <ul>s selected by tocListSelector
         // .active-expanded is applied to the ToC links that are parents of this one
+        //console.log("[refreshToc]swapping out active class...");
         $toc.find(".active").removeClass("active");
         $toc.find(".active-parent").removeClass("active-parent");
         $best.addClass("active");
@@ -86,6 +102,7 @@
     };
 
     var makeToc = function() {
+      console.log("[makeToc]Building ToC :) ...");
       recacheHeights();
       refreshToc();
 
