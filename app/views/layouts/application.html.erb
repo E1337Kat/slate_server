@@ -78,7 +78,7 @@ toc_paged_data = toc_paged_helper.toc_paged_data
             <%# If the current h1 we are looking at is for this page, process it in the old way. %>
             <%# logger.info "found resource_id to be:" + params[:resource_id] %>
             <%# logger.info "found h1[:id] to be:" + h1[:id] %>
-            <% if h1[:id] == params[:resource_id].downcase %>
+            <% if (params[:resource_id] != nil) && (h1[:id] == params[:resource_id].downcase) %>
               <% logger.info 'Found current ToC Entry (' +h1[:id].to_s + ')' %>
               <% toc_data.each do |h1| %>
                 <li>
