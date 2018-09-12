@@ -2,10 +2,13 @@ source 'https://rubygems.org'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+
 # Use the thin server
 gem 'thin'
 gem 'rails'
 gem 'railties'
+
+# Use Rouge for sytax highlighting and Redcarpet for markdown interpretation
 gem 'rouge', '~> 2.0.5'
 gem 'redcarpet', '~> 3.4.0'
 
