@@ -1,35 +1,104 @@
 production: &production
-  title: API Reference
+  title: Wecounsel API Documentation
 
-  language_tabs: # must be one of https://git.io/vQNgJ
-    - shell
-    - ruby
-    - python
-    - javascript
+  language_tabs:
+    - json: JSON
+    - shell: cURL
 
-  forward_includes:
-    - errors
-    - authorization
-    - api_notes
-
-  search: true
-
-  multiple_pages: true
+  multiple_pages: false
+  
+  search: false
 
   resources:
-    - kittens:'kittens'
-    - puppers:'puppers'
+    - Account:'account'
+    - AvailableTime:'availabletime'
+    - Calendar:'calendar'
+    - CalendarEvent:'calendarevent'
+    - Message:'message'
+    - Notification:'notification'
+    - Organization:'organization'
+    - ProviderConsumerConnection:'providerconsumerconnection'
+    - Session:'session'
+    - SessionGuestAccess:'sessionguestaccess'
+    - SessionRequest:'sessionrequest'
+    - SessionType:'sessiontype'
+    - User:'user'
+    - UserDevice:'userdevice'
+    - UserOrganizationMembership:'userorganizationmembership'
 
-  kittens:
-    - Get All Kittens:'get-all-kittens'
-    - Get a specific kitten:'get-a-specific-kitten'
-    - Delete a specific kitten:'delete-a-specific-kitten'
-
-  puppers:
-    - Get All Puppers:'get-all-puppers'
-    - Get a specific pupper:'get-a-specific-pupper'
-    - Delete a specific pupper:'delete-a-specific-pupper'
+  account:
+    - 1) Get user settings of the authenticated user:'1)_get_user_settings_of_the_authenticated_user'
+    - 2) Update user settings of the authenticated user:'2)_update_user_settings_of_the_authenticated_user'
+    - 3) Reset password and send instructions to the specified email:'3)_reset_password_and_send_instructions_to_the_specified_email'
+  availabletime:
+    - 1) Get detailed information about an available time:'1)_get_detailed_information_about_an_available_time'
+    - 2) Get detailed information about a merged stretch of available time:'2)_get_detailed_information_about_a_merged_stretch_of_available_time'
+    - 3) Create a new available time:'3)_create_a_new_available_time'
+    - 4) Create a new repeating available time:'4)_create_a_new_repeating_available_time'
+    - 5) Update an available time:'5)_update_an_available_time'
+    - 6) Delete an available time:'6)_delete_an_available_time'
+  calendar:
+    - 1) Get a list of all events of the current user:'1)_get_a_list_of_all_events_of_the_current_user'
+    - 2) Get a list of events at the specified date and later:'2)_get_a_list_of_events_at_the_specified_date_and_later'
+    - 3) Get a list of events at the specified date and earlier:'3)_get_a_list_of_events_at_the_specified_date_and_earlier'
+    - 4) Get a list of events for the specified user:'4)_get_a_list_of_events_for_the_specified_user'
+    - 5) Get a paginated list of all events for the current user:'5)_get_a_paginated_list_of_all_events_for_the_current_user'
+    - 6) Get a list of events filtered by session_mode for the current user:'6)_get_a_list_of_events_filtered_by_session_mode_for_the_current_user'
+  calendarevent:
+    - 1) Get detailed information about a calendar event:'1)_get_detailed_information_about_a_calendar_event'
+    - 2) Create a new calendar event:'2)_create_a_new_calendar_event'
+    - 3) Update a calendar event:'3)_update_a_calendar_event'
+    - 4) Delete an available time:'4)_delete_an_available_time'
+  message:
+    - 1) Get detailed information about a message (owned by the current user):'1)_get_detailed_information_about_a_message_(owned_by_the_current_user)'
+    - 2) Create and send a new message:'2)_create_and_send_a_new_message'
+    - 3) Create and send a reply to a previous message:'3)_create_and_send_a_reply_to_a_previous_message'
+    - 4) Create and save a draft message:'4)_create_and_save_a_draft_message'
+  notification:
+    - 1) Mark notification as read:'1)_mark_notification_as_read'
+  organization:
+    - 1) Get a list of organization&#39;s user memberships:'1)_get_a_list_of_organizations_user_memberships'
+    - 2) Activate an organization:'2)_activate_an_organization'
+    - 2) De-activate an organization:'2)_de-activate_an_organization'
+  providerconsumerconnection:
+    - 1) Get detailed information about a provider-consumer connection:'1)_get_detailed_information_about_a_provider-consumer_connection'
+    - 2) Create a new provider-consumer connection:'2)_create_a_new_provider-consumer_connection'
+  session:
+    - 1) Get detailed information about a session:'1)_get_detailed_information_about_a_session'
+    - 2) Get detailed information about a repeating session:'2)_get_detailed_information_about_a_repeating_session'
+    - 3) Create a new session:'3)_create_a_new_session'
+    - 4) Create a new repeating session:'4)_create_a_new_repeating_session'
+    - 5) Update a session:'5)_update_a_session'
+    - 6) Delete a session:'6)_delete_a_session'
+    - 8) Check in current user to the session:'8)_check_in_current_user_to_the_session'
+  sessionguestaccess:
+    - 2) Delete session guest access:'2)_delete_session_guest_access'
+  sessionrequest:
+    - 1) Get detailed information about a session request:'1)_get_detailed_information_about_a_session_request'
+    - 2) Approve session request:'2)_approve_session_request'
+    - 3) Decline session request:'3)_decline_session_request'
+  sessiontype:
+    - 1) Get detailed information about a session type (owned by a user):'1)_get_detailed_information_about_a_session_type_(owned_by_a_user)'
+    - 2) Get detailed information about a session type (owned by an organization):'2)_get_detailed_information_about_a_session_type_(owned_by_an_organization)'
+  user:
+    - 1) Get detailed information about a user:'1)_get_detailed_information_about_a_user'
+    - 10) Update a user:'10)_update_a_user'
+    - 11) Get a list of the user&#39;s administrated organizations:'11)_get_a_list_of_the_users_administrated_organizations'
+    - 12) Get a list of user&#39;s logins:'12)_get_a_list_of_users_logins'
+    - 2) Get detailed information about the current user:'2)_get_detailed_information_about_the_current_user'
+    - 3) Get a list of user&#39;s active consumer connections:'3)_get_a_list_of_users_active_consumer_connections'
+    - 4) Get a list of user&#39;s active provider connections:'4)_get_a_list_of_users_active_provider_connections'
+    - 5) Get a list of session types owned by a user:'5)_get_a_list_of_session_types_owned_by_a_user'
+    - 6) Get a list of all events for a user:'6)_get_a_list_of_all_events_for_a_user'
+    - 7) Get a list of user&#39;s organization memberships:'7)_get_a_list_of_users_organization_memberships'
+    - 8) Create a new provider user:'8)_create_a_new_provider_user'
+    - 9) Create a new consumer user:'9)_create_a_new_consumer_user'
+  userdevice:
+    - 1) Create a new user device:'1)_create_a_new_user_device'
+  userorganizationmembership:
+    - 1) Get user-organization membership:'1)_get_user-organization_membership'
+    - 2) Update user-organization membership:'2)_update_user-organization_membership'
 
 development:
   <<: *production
-  debug: true
+  debug: false
