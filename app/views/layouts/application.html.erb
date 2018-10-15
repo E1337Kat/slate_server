@@ -51,7 +51,8 @@ toc_paged_data = toc_paged_helper.toc_paged_data
       </span>
     </a>
     <div class="toc-wrapper">
-      <%= image_tag "logo.png", class: 'logo' %>
+      <% logo_img = 'logo.png'%>
+      <%= link_to image_tag(logo_img, class: 'logo'), root_path %>
       <% if language_tabs.any? %>
         <div class="lang-selector">
           <% language_tabs.each do |lang| 
@@ -133,7 +134,7 @@ toc_paged_data = toc_paged_helper.toc_paged_data
         <% logger.info 'Adding ToC footers...' %>
         <ul class="toc-footer">
           <% Rails.configuration.data['toc_footers'].each do |footer| %>
-            <li><%= footer %></li>
+            <li><%= footer.html_safe %></li>
           <% end %>
         </ul>
       <% end %>
