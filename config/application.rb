@@ -18,6 +18,7 @@ require "action_cable/engine"
 # require "active_storage/engine"
 require "sprockets/railtie"
 require "rails/test_unit/railtie"
+require "active_support/logger"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -42,6 +43,8 @@ module WecounselDocs
 
     config.eager_load_paths << Rails.root.join('lib')
     config.data = config_for(:data)
+    
+    config.logger = Logger.new(STDOUT)
 
     paths['build'] = 'build'
   end
