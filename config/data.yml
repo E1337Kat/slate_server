@@ -9,16 +9,14 @@ production: &production
 
   forward_includes:
     - errors
-    - authorization
-    - api_notes
 
   search: true
 
   multiple_pages: true
 
   resources:
-    - kittens:'kittens'
-    - puppers:'puppers'
+    - Kittens:'kittens'
+    - Puppers:'puppers'
 
   kittens:
     - Get All Kittens:'get-all-kittens'
