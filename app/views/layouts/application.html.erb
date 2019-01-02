@@ -78,8 +78,8 @@ toc_paged_data = toc_paged_helper.toc_paged_data
             <%# If the current h1 we are looking at is for this page, process it in the old way. %>
             <%# logger.info "found resource_id to be:" + params[:resource_id] %>
             <%# logger.info "found h1[:id] to be:" + h1[:id] %>
-            <% if h1[:id] == params[:resource_id].downcase %>
-              <% logger.info 'Found current ToC Entry (' +h1[:id].to_s + ')' %>
+            <% if h1[:id] == params[:resource_id]&.downcase %>
+              <% logger.info 'Found current ToC Entry (' +h1[:id]&.to_s + ')' %>
               <% toc_data.each do |h1| %>
                 <li>
                   <%= link_to h1[:content], 
@@ -89,9 +89,9 @@ toc_paged_data = toc_paged_helper.toc_paged_data
                               data: {title: h1[:id]} %>
                   <ul class="toc-list-h2">
                     <% logger.info 'Building ToC lower level...' %>
-                    <% h1[:children].each do |h2| %>
+                    <% h1[:children]&.each do |h2| %>
                       <li>
-                        <% resource_url_full = h1[:link].to_s %>
+                        <% resource_url_full = h1[:link]&.to_s %>
                         <%= link_to h2[:content],
                                     docs_link_path(:resource_id => h1[:id],
                                                     anchor: h2[:id]),
