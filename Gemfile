@@ -7,8 +7,8 @@ source 'https://rubygems.org'
 
 # Use the thin server
 gem 'thin'
-gem 'rails', '5.2.2'
-gem 'railties', '5.2.2'
+gem 'rails', '5.2.2.1'
+gem 'railties', '5.2.2.1'
 
 # Use Rouge for sytax highlighting and Redcarpet for markdown interpretation
 gem 'rouge', '~> 2.0.5'
