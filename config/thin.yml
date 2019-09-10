@@ -1,10 +1,10 @@
 ---
-chdir: "/home/ellie/Development/wecounsel_docs/wecounsel_docs"
+chdir: "/var/www/slate_server/"
 environment: development
 address: 0.0.0.0
 port: 3000
 timeout: 30
-log: "/home/ellie/Development/wecounsel_docs/wecounsel_docs/log/thin.log"
+log: "/var/www/slate_server/log/thin.log"
 pid: tmp/pids/thin.pid
 max_conns: 1024
 max_persistent_conns: 100

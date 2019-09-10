@@ -10,7 +10,7 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.lis
 apt-get update && apt-get install -y yarn
  
 # Define where our application will live inside the image
-ENV RAILS_ROOT /var/www/wecounsel_docs
+ENV RAILS_ROOT /var/www/slate_server
  
 # Create application home. App server will need the pids dir so just create everything in one shot
 RUN mkdir -p $RAILS_ROOT/tmp/pids
