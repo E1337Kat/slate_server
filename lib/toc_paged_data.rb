@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'yaml'
 # Public: A method of grabbing and storing the table of contents headers
 # from config/data.yml

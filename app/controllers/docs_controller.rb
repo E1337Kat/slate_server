@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 # Public: The main controller for displaying the document templates
 class DocsController < ApplicationController
   include ApplicationHelper
 
-  FILE = 'index.html.md'.freeze
+  FILE = 'index.html.md'
 
   def index
     md_resource = markdown(index_template_path)

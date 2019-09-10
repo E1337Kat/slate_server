@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Main helper class
 module ApplicationHelper
   require 'redcarpet'
   require 'rouge'
@@ -10,9 +13,9 @@ module ApplicationHelper
     def block_code(code, full_lang_name)
       if full_lang_name
         parts = full_lang_name.split('--')
-        rouge_lang_name = (parts) ? parts[0] : "" # just parts[0] here causes null ref exception when no language specified
+        rouge_lang_name = parts ? parts[0] : '' # just parts[0] here causes null ref exception when no language specified
         super(code, rouge_lang_name).sub("highlight #{rouge_lang_name}") do |match|
-          match + " tab-" + full_lang_name
+          match + ' tab-' + full_lang_name
         end
       else
         super(code, full_lang_name)
@@ -42,6 +45,7 @@ module ApplicationHelper
   # Should help with active toc, but does not seem to work. :(
   def current_class?(test_path)
     return 'active' if request.path == test_path
+
     ''
   end
 end

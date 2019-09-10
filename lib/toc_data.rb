@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 require 'nokogiri'
+# Finds the data for the left sidebar based on contents of page
 class TocData
   def initialize(content)
     @page_content = content
@@ -10,16 +13,16 @@ class TocData
     # get a flat list of headers
     headers = []
     html_doc.css('h1, h2, h3').each do |header|
-      headers.push({
+      headers.push(
         id: header.attribute('id').to_s,
         content: header.children,
         title: header.content.to_s.gsub(/<[^>]*>/, ''),
         level: header.name[1].to_i,
         children: []
-      })
+      )
     end
 
-    [3,2].each do |header_level|
+    [3, 2].each do |header_level|
       header_to_nest = nil
       headers = headers.reject do |header|
         if header[:level] == header_level
