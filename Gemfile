@@ -12,7 +12,7 @@ gem 'railties', '5.2.2.1'
 
 # Use Rouge for sytax highlighting and Redcarpet for markdown interpretation
 gem 'rouge', '~> 2.0.5'
-gem 'redcarpet', '~> 3.4.0'
+gem 'redcarpet', '~> 3.5.1'
 
 gem 'sprockets'
 gem 'sassc-rails'
